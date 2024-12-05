@@ -9,6 +9,8 @@ int main(){
 
     //serial_init("datoteka.bin");
 
+    // THIS IS GIT TEST!!!
+
     FILE *fp = fopen("datoteka.bin", "rb+");
 
 
