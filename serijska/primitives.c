@@ -16,12 +16,12 @@ BLOCK block_init(){
     char zeros[BLOCK_SIZE] = {};
     BLOCK block;
     memcpy(&block, zeros, BLOCK_SIZE);
-    block.records[0].flags |= F_EOF;
+    block.records[0].flags = F_EOF;
     return block;
 }
 
 int block_write(FILE *fp, BLOCK block, long pos){
-    fseek(fp, 0, pos);
+    fseek(fp, pos, SEEK_SET);
     if(fwrite(&block, BLOCK_SIZE, 1, fp) != 1){
         err("Upis bloka");
         return STAT_ERR;
@@ -34,7 +34,7 @@ int block_read(FILE *fp, BLOCK *block, long pos){
         err("Citanje bloka; handle ka datoteci nevalidan");
         return STAT_ERR;
     }
-    fseek(fp, 0, pos);
+    fseek(fp, pos, SEEK_SET);
     if(fread(block, BLOCK_SIZE, 1, fp) != 1){
         return STAT_EOF;
     }
