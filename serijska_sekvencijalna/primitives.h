@@ -34,8 +34,6 @@ typedef struct block_st{
 } BLOCK;
 
 
-int file_init(const char *, FILE **);
-
 BLOCK block_init();
 
 int block_write(FILE *, BLOCK, long);
